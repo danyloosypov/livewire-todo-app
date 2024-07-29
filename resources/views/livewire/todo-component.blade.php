@@ -59,7 +59,7 @@
                     class="bg-gray-100 ml-2 rounded px-4 py-2 hover:bg-gray-100" />
             </div>
         </div>
-        <div id="todos-list">
+        <div wire:poll.5s id="todos-list">
             @foreach ($todos as $todo)
                 @include('livewire.todo-card')
             @endforeach
