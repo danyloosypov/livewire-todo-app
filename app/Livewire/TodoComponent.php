@@ -15,6 +15,7 @@ class TodoComponent extends Component
     public $editingTodoId;
     public $editedName;
     public $showErrorModal = false;
+    public $perPage = 2;
 
     protected $listeners = ['closeModalEvent' => 'closeModal'];
 
@@ -109,10 +110,13 @@ class TodoComponent extends Component
     public function render()
     {
         $todos = Todo::latest()->where('name', 'like', '%' . $this->searchParam . '%')
-            ->paginate(2);
+            ->paginate($this->perPage);
+
+        $totalTodos = Todo::where('name', 'like', '%' . $this->searchParam . '%')->count();
 
         return view('livewire.todo-component', [
             'todos' => $todos,
+            'totalTodos' => $totalTodos
         ]);
     }
 }
